@@ -9,7 +9,7 @@ metadata:
 
 # AirTag - 物品位置记录助手
 
-> **前置条件：** 需要已安装 [lark-cli](https://github.com/nicepkg/lark-cli) 并完成认证（`lark-cli auth login`）。如果环境中有 lark-shared 或 lark-base 相关的 Skill/Rule，可先阅读以了解认证和权限处理。
+> **前置条件：** 需要已安装 [lark-cli](https://github.com/larksuite/cli) 并完成认证（`lark-cli auth login`）。如果环境中有 lark-shared 或 lark-base 相关的 Skill/Rule，可先阅读以了解认证和权限处理。
 
 ## Overview
 

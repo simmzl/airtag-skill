@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Skills.sh](https://img.shields.io/badge/skills.sh-Compatible-green)](https://skills.sh)
-[![lark-cli](https://img.shields.io/badge/lark--cli-Required-blue)](https://github.com/nicepkg/lark-cli)
+[![lark-cli](https://img.shields.io/badge/lark--cli-Required-blue)](https://github.com/larksuite/cli)
 
 <br>
 
@@ -78,7 +78,7 @@ curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmz
 
 ### 前置条件
 
-- [lark-cli](https://github.com/nicepkg/lark-cli) 已安装并完成认证（`lark-cli auth login`）
+- [lark-cli](https://github.com/larksuite/cli) 已安装并完成认证（`lark-cli auth login`）
 
 ---
 
