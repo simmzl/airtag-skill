@@ -78,13 +78,7 @@ curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmz
 
 ### 前置条件
 
-- [lark-cli](https://github.com/larksuite/cli) 已安装并完成认证：
-
-```bash
-npm install -g @nicepkg/lark-cli
-lark-cli config init    # 首次配置应用
-lark-cli auth login     # 用户授权
-```
+- [lark-cli](https://github.com/larksuite/cli) 已安装并完成认证
 
 ---
 
