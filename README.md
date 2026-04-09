@@ -116,7 +116,7 @@ curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmz
 
 ## 配置
 
-初始化后会在当前目录生成 `.airtag-config.json`：
+初始化后会在全局目录生成配置文件 `~/.config/airtag/config.json`：
 
 ```json
 {
@@ -124,6 +124,8 @@ curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmz
   "table_id": "your_table_id"
 }
 ```
+
+全局配置意味着**任何目录、任何新会话**都能直接使用，无需重复初始化。
 
 如需重新绑定表格，删除该文件即可。
 

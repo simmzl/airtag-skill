@@ -1,7 +1,7 @@
 ---
 name: airtag
 version: 1.0.0
-description: "Use when user wants to record where things are located, track item locations, or manage a personal item registry via Lark/Feishu Bitable. 当用户需要记录物品位置、查找东西在哪、管理物品清单时使用。适用于任意支持 Skill 的 AI 编程助手。"
+description: "Use when user mentions item locations, asks where something is, records where they put things, or manages personal belongings. Trigger on: XX在哪、放在哪、找不到XX、东西放哪了、记录位置、物品清单、钥匙、护照、充电器等物品词+位置词。"
 metadata:
   requires:
     bins: ["lark-cli"]
@@ -19,10 +19,13 @@ metadata:
 
 ### 1. 首次使用：初始化表格
 
-检查项目根目录是否存在 `.airtag-config.json`：
+按以下优先级查找配置文件：
 
-- **存在且有效**：读取 `base_token` 和 `table_id`，跳到步骤 2
-- **不存在**：进入初始化流程：
+1. `~/.config/airtag/config.json`（全局，推荐）
+2. 当前目录 `.airtag-config.json`（项目级，向后兼容）
+
+- **找到且有效**：读取 `base_token` 和 `table_id`，跳到步骤 2
+- **未找到**：进入初始化流程：
 
 #### 询问用户
 
@@ -52,7 +55,7 @@ lark-cli base +table-create \
 
 #### 保存配置
 
-将 `base_token` 和 `table_id` 写入项目根目录的 `.airtag-config.json`：
+将 `base_token` 和 `table_id` 写入全局配置 `~/.config/airtag/config.json`（目录不存在则创建）：
 
 ```json
 {
