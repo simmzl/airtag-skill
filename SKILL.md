@@ -108,7 +108,21 @@ lark-cli base +record-upsert \
   --as user
 ```
 
-### 5. 列出所有物品
+### 5. 删除物品
+
+用户说"删掉XX"或"不记录XX了"时，先查找该物品的 record_id，然后删除：
+
+```bash
+lark-cli base +record-delete \
+  --base-token <base_token> \
+  --table-id <table_id> \
+  --record-id <record_id> \
+  --as user
+```
+
+删除前需向用户确认。
+
+### 6. 列出所有物品
 
 ```bash
 lark-cli base +record-list \
@@ -124,7 +138,7 @@ lark-cli base +record-list \
 | 错误 | 处理 |
 |------|------|
 | Permission denied | 参考 lark-shared 的权限处理流程 |
-| base_token 无效 | 删除 `.airtag-config.json`，重新初始化 |
+| base_token 无效 | 删除 `~/.config/airtag/config.json`（或项目级 `.airtag-config.json`），重新初始化 |
 | 字段名不匹配 | 用 `+field-list` 检查实际字段名，适配 |
 
 ## 权限

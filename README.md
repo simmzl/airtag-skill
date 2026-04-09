@@ -78,7 +78,13 @@ curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmz
 
 ### 前置条件
 
-- [lark-cli](https://github.com/larksuite/cli) 已安装并完成认证（`lark-cli auth login`）
+- [lark-cli](https://github.com/larksuite/cli) 已安装并完成认证：
+
+```bash
+npm install -g @nicepkg/lark-cli
+lark-cli config init    # 首次配置应用
+lark-cli auth login     # 用户授权
+```
 
 ---
 
@@ -138,6 +144,7 @@ airtag-skill/
 ├── SKILL.md                    # Skill 本体（提示词）
 ├── .airtag-config.example.json # 配置文件示例
 ├── .gitignore                  # 忽略真实配置
+├── LICENSE                     # MIT 许可证
 └── README.md                   # 你正在看的这个
 ```
 
