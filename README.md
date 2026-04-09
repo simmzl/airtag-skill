@@ -1,6 +1,6 @@
 # AirTag - 物品位置记录助手
 
-一个 [Claude Code](https://claude.ai/code) Skill，帮你记录"什么东西放在哪里"，数据存储在飞书多维表格中。
+一份 AI Agent Skill 提示词，让任意 AI 编程助手（Claude Code、Cursor、Windsurf、Cline 等）帮你记录"什么东西放在哪里"，数据存储在飞书多维表格中。
 
 ## 功能
 
@@ -11,21 +11,28 @@
 
 ## 前置条件
 
-- [Claude Code](https://claude.ai/code)
+- 任意支持 Skill/Rule 的 AI 编程助手
 - [lark-cli](https://github.com/nicepkg/lark-cli) 已安装并完成认证（`lark-cli auth login`）
 
 ## 安装
 
-将 `SKILL.md` 复制到 Claude Code 的 skills 目录：
+将 `SKILL.md` 复制到你的 AI 助手的 skills/rules 目录，例如：
 
 ```bash
+# Claude Code
 mkdir -p ~/.claude/skills/airtag
 cp SKILL.md ~/.claude/skills/airtag/SKILL.md
+
+# Cursor
+mkdir -p ~/.cursor/skills/airtag
+cp SKILL.md ~/.cursor/skills/airtag/SKILL.md
 ```
+
+或者直接将 `SKILL.md` 内容作为项目级 Rule 使用。
 
 ## 使用
 
-首次使用时，Skill 会询问你是否已有飞书多维表格：
+首次使用时，AI 会询问你是否已有飞书多维表格：
 
 - **已有表格** — 发送链接，自动绑定
 - **没有表格** — 自动创建一个，包含以下字段：
