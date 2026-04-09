@@ -1,41 +1,101 @@
-# AirTag - 物品位置记录助手
+<div align="center">
 
-一份 AI Agent Skill 提示词，让任意 AI 编程助手（Claude Code、Cursor、Windsurf、Cline 等）帮你记录"什么东西放在哪里"，数据存储在飞书多维表格中。
+# AirTag.skill
 
-## 功能
+> *「东西放哪了？问 AI 就行。」*
 
-- **记录物品位置** — 告诉 AI "护照放在书房抽屉里"，自动写入飞书表格
-- **查找物品** — 问 AI "护照在哪"，立即返回位置
-- **更新位置** — 物品换了地方？直接说，自动更新记录
-- **列出所有物品** — 一键查看所有物品及其位置
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skills.sh](https://img.shields.io/badge/skills.sh-Compatible-green)](https://skills.sh)
+[![lark-cli](https://img.shields.io/badge/lark--cli-Required-blue)](https://github.com/nicepkg/lark-cli)
 
-## 前置条件
+<br>
 
-- 任意支持 Skill/Rule 的 AI 编程助手
-- [lark-cli](https://github.com/nicepkg/lark-cli) 已安装并完成认证（`lark-cli auth login`）
+**让任意 AI 编程助手帮你记录物品位置，数据存在飞书多维表格里，随时问随时答。**
+
+<br>
+
+[看效果](#效果示例) · [安装](#安装) · [工作原理](#工作原理) · [配置](#配置)
+
+</div>
+
+---
+
+## 效果示例
+
+```
+用户      ❯ 护照放在书房抽屉里
+
+AirTag   ❯ ✅ 已记录：护照 → 书房抽屉
+```
+
+```
+用户      ❯ 护照在哪？
+
+AirTag   ❯ 📍 护照 — 书房抽屉
+           记录时间：2026-04-09 10:55
+```
+
+```
+用户      ❯ 护照换地方了，放到卧室床头柜
+
+AirTag   ❯ ✅ 已更新：护照 → 卧室床头柜
+```
+
+```
+用户      ❯ 列出所有物品
+
+AirTag   ❯ 📋 物品清单：
+           | 物品   | 位置         | 记录时间          |
+           |--------|-------------|------------------|
+           | 护照   | 卧室床头柜   | 2026-04-09 11:02 |
+           | 钥匙   | 玄关鞋柜     | 2026-04-08 20:30 |
+           | 充电器 | 客厅沙发旁   | 2026-04-07 14:15 |
+```
+
+这不是笔记本。你说一句话，AI 解析物品和位置，写入飞书多维表格。下次忘了东西在哪，问一句就行。
+
+---
 
 ## 安装
 
-将 `SKILL.md` 复制到你的 AI 助手的 skills/rules 目录，例如：
+```bash
+npx skills add simmzl/airtag-skill
+```
+
+或手动安装：
 
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills/airtag
-cp SKILL.md ~/.claude/skills/airtag/SKILL.md
+curl -o ~/.claude/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmzl/airtag-skill/main/SKILL.md
 
 # Cursor
 mkdir -p ~/.cursor/skills/airtag
-cp SKILL.md ~/.cursor/skills/airtag/SKILL.md
+curl -o ~/.cursor/skills/airtag/SKILL.md https://raw.githubusercontent.com/simmzl/airtag-skill/main/SKILL.md
 ```
 
-或者直接将 `SKILL.md` 内容作为项目级 Rule 使用。
+也可以直接将 `SKILL.md` 内容作为项目级 Rule 使用。
 
-## 使用
+### 前置条件
 
-首次使用时，AI 会询问你是否已有飞书多维表格：
+- [lark-cli](https://github.com/nicepkg/lark-cli) 已安装并完成认证（`lark-cli auth login`）
 
-- **已有表格** — 发送链接，自动绑定
-- **没有表格** — 自动创建一个，包含以下字段：
+---
+
+## 工作原理
+
+```
+首次使用                          日常使用
+┌─────────────────┐              ┌─────────────────┐
+│  有飞书表？       │              │ "钥匙在玄关"     │
+│  ├─ 有 → 发链接  │              │       ↓          │
+│  └─ 没有 → 自动建│              │  解析物品+位置    │
+│       ↓          │              │       ↓          │
+│  保存配置到本地   │              │  写入飞书表格     │
+└─────────────────┘              └─────────────────┘
+```
+
+**1. 初始化** — 首次使用时询问你是否已有飞书多维表格。有就绑定，没有就自动创建，表结构如下：
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
@@ -44,18 +104,19 @@ cp SKILL.md ~/.cursor/skills/airtag/SKILL.md
 | 备注 | 文本 | 补充信息 |
 | 记录时间 | 日期 | 记录/更新时间 |
 
-配置完成后，直接对话即可：
+**2. 记录** — 说"护照放在书房抽屉里"，AI 自动解析并写入表格。
 
-```
-> 护照放在书房抽屉里
-> 钥匙在玄关鞋柜上
-> 护照在哪？
-> 列出所有物品
-```
+**3. 查找** — 问"护照在哪"，AI 从表格中检索最近记录。
+
+**4. 更新** — 说"护照换到卧室了"，AI 找到原记录并更新位置。
+
+**5. 列表** — 说"列出所有物品"，AI 以表格形式展示全部记录。
+
+---
 
 ## 配置
 
-初始化后会在项目根目录生成 `.airtag-config.json`，存储表格绑定信息：
+初始化后会在当前目录生成 `.airtag-config.json`：
 
 ```json
 {
@@ -64,8 +125,35 @@ cp SKILL.md ~/.cursor/skills/airtag/SKILL.md
 }
 ```
 
-如需重新绑定，删除该文件即可。
+如需重新绑定表格，删除该文件即可。
+
+---
+
+## 仓库结构
+
+```
+airtag-skill/
+├── SKILL.md                    # Skill 本体（提示词）
+├── .airtag-config.example.json # 配置文件示例
+├── .gitignore                  # 忽略真实配置
+└── README.md                   # 你正在看的这个
+```
+
+---
 
 ## 许可证
 
-MIT
+MIT — 随便用，随便改。
+
+---
+
+<div align="center">
+
+**记东西放哪，不该占用你的脑子。**<br>
+**说一句话，AI 帮你记住。**
+
+<br>
+
+MIT License © [simmzl](https://github.com/simmzl)
+
+</div>
