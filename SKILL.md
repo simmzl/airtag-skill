@@ -1,7 +1,7 @@
 ---
 name: airtag
 version: 1.0.0
-description: "Use when user wants to record where things are located, track item locations, or manage a personal item registry. 当用户需要记录物品位置、查找东西在哪、管理物品清单时使用。"
+description: "Use when user wants to record where things are located, track item locations, or manage a personal item registry via Lark/Feishu Bitable. 当用户需要记录物品位置、查找东西在哪、管理物品清单时使用。适用于任意支持 Skill 的 AI 编程助手。"
 metadata:
   requires:
     bins: ["lark-cli"]
